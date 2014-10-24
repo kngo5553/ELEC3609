@@ -1,0 +1,87 @@
+{% extends "reg_base.html" %}
+       {% block content %}
+
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+
+
+
+	  <div id="login-page">
+	  	<div class="container">
+	  	
+	  	  
+
+		      <form class="form-login" action="" method="post">
+		        <h2 class="form-login-heading">Account Login</h2>
+
+
+
+
+    {% if errors %}
+                {% for error in errors %}
+        <li>
+
+             <p style="color: red;">
+                Please correct the error: {{error}} below.
+             </p>
+            
+        </li>
+          {% endfor %}
+    {% endif %}
+
+		        <div class="login-wrap">
+
+
+          {% if username %}
+
+
+		            <div class="registration"  style="text-align: center;">
+		            	 <h2> Dear <font color=blue>{{ username}}</font></h2>
+               <p>You have successfully created your account. 
+               You can login now!
+
+		              <br/>
+		              
+
+		            </div>
+               
+             
+				
+          {% endif %}
+
+		            <input type="text" class="form-control" name="account" placeholder="User ID" autofocus>
+		            <br>
+
+		            <input type="password"  name="password" class="form-control" placeholder="Password">
+
+
+		            <label class="checkbox">
+		            </label>
+
+
+		            <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+		            <hr>
+		            
+		            <div class="registration">
+		                Don't have an account yet?<br/>
+		                <a class="" href="/register/">
+		                    Create an account
+		                </a>
+		            </div>
+                     
+                     <hr>
+		            	<div class="form-footer" style="text-align: center;">
+		            		<input type=button class="btn btn-default" value="Back to Homepage" onclick="window.location.href='/index/'">
+						      </div>
+		
+		        </div>
+		
+		       
+		
+		      </form>	  	
+	  	
+	  	</div>
+	  </div>
+
+        {% endblock %}

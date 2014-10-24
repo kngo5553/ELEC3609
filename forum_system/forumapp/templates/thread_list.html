@@ -1,0 +1,252 @@
+
+
+{% extends "base.html" %}
+
+
+
+
+ {% block sidebar %}
+
+ 
+                    
+                  <li class="mt">
+                      <a id="nav_homepage" class="active" href="/">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Homepage</span>
+                      </a>
+                  </li>
+
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>ELEC Forum</span>
+                      </a>
+                      <ul class="sub">
+
+                          <li><a  href="/general_thread_list">General Forum</a></li>
+                          <li><a  href="buttons.html">ELEC Forum</a></li>
+                          <li><a  href="panels.html">Support & Help</a></li>
+                          <li><a  href="google_maps.html">Google Maps</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-bar-chart-o"></i>
+                          <span>Course Review</span>
+                      </a>
+                 
+                  </li>
+                  <li class="sub-menu">
+                      <a href="/whiteboard/" >
+                          <i class="fa fa-book"></i>
+                          <span>Whiteboard</span>
+                      </a>
+                 
+                  </li>
+            
+                 
+
+
+
+
+   {% endblock %}
+
+
+  {% block content %}
+
+
+
+ <div class="row mt">
+            <div class="col-sm-3">
+                <section class="panel">
+                    <div class="panel-body">
+                        <a href="mail_compose.html"  class="btn btn-compose">
+                            <i class="fa fa-pencil"></i>  Create Thread
+                        </a>
+                        <ul class="nav nav-pills nav-stacked mail-nav">
+                            <li class="active"><a href="thread_list"> <i class="fa fa-inbox"></i> Thread List  </a></li>
+                           
+                            <li><a href="#"> <i class="fa fa-exclamation-circle"></i> Bookmarks</a></li>
+                            <li><a href="#"> <i class="fa fa-file-text-o"></i> Your Posts</a></a></li>
+                           
+                        </ul>
+                    </div>
+                </section>
+
+            </div>
+
+
+
+
+
+            <div class="col-sm-9">
+                <section class="panel">
+                    <header class="panel-heading wht-bg">
+                       <h4 class="gen-case">Thread List
+                        <form action="#" class="pull-right mail-src-position">
+                            <div class="input-append">
+                                <input type="text" class="form-control " placeholder="Search Mail">
+                            </div>
+                        </form>
+                       </h4>
+                    </header>
+                    <div class="panel-body minimal">
+                        <div class="mail-option">
+                            <div class="chk-all">
+                                <div class="pull-left mail-checkbox">
+                                    <input type="checkbox" class="">
+                                </div>
+
+                                <div class="btn-group">
+                                    <a data-toggle="dropdown" href="#" class="btn mini all">
+                                        All
+                                        <i class="fa fa-angle-down "></i>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"> None</a></li>
+                                        <li><a href="#"> Read</a></li>
+                                        <li><a href="#"> Unread</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="btn-group">
+                                <a data-original-title="Refresh" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+                                    <i class=" fa fa-refresh"></i>
+                                </a>
+                            </div>
+                            <div class="btn-group hidden-phone">
+                                <a data-toggle="dropdown" href="#" class="btn mini blue">
+                                    More
+                                    <i class="fa fa-angle-down "></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li>
+                                    <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <a data-toggle="dropdown" href="#" class="btn mini blue">
+                                    Move to
+                                    <i class="fa fa-angle-down "></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="fa fa-pencil"></i> Mark as Read</a></li>
+                                    <li><a href="#"><i class="fa fa-ban"></i> Spam</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                                </ul>
+                            </div>
+
+
+
+
+
+
+                            <ul class="unstyled inbox-pagination">
+
+
+<h3>
+
+<li>
+
+{% if has_previous %}
+  <a href="/?page={{ previous }}">Prev</a>
+{% endif %}
+{% if has_next %}
+  <a href="/?page={{ next }}"></a>
+{% endif %}
+
+
+{% if articleList.has_previous %}
+<a href="?page={{ articleList.previous_page_number }}" title="Prev">Prev</a>&nbsp;
+{% endif %}
+{% for p in page_range %}
+{% ifequal p articleList.number %}
+<span>{{p}}</span>
+{% else %}
+<a href="?page={{p}}" title="第{{p}}页">{{p}}</a>
+{% endifequal %}
+{% endfor %}
+&nbsp;
+{% if articleList.has_next %}
+<a href="?page={{ articleList.next_page_number }}" title="Next">Next</a>&nbsp;
+{% endif %}
+
+
+</li></h3>
+                            </ul>
+
+
+
+
+
+
+                        </div>
+                        <div class="table-inbox-wrap ">
+
+
+
+
+                            <table class="table table-inbox table-hover">
+
+
+                              <thead>
+                              <tr>
+                                  <th></th>
+                                  <th><i class="fa fa-bookmark-o"></i> Bookmark</th>
+                                  <th><i class="fa fa-smile-o" width = "100"></i> Title</th>
+                                  <th><i class="fa fa-edit"></i> Author</th>
+                                  <th><i class=" fa fa-comment"></i> Comments</th>
+                                  <th></th>
+                              </tr>
+                              </thead>
+                        <tbody>
+
+{% if info %}
+  {% for article in articleList.object_list %}
+
+
+                            <tr class="unread">
+                            <td class="inbox-small-cells">
+                                <input type="checkbox" class="mail-checkbox">
+                            </td>
+                            <td class="inbox-small-cells" width="120"><i class="fa fa-star"></i></td>
+
+                            <td class="view-message " width="400" ><a href="/forumapp/{{ thread.id }}/">
+                             {{ article.title }}</a></td>
+
+                            <td ><a href="/forumapp/{{ thread.id }}/">
+                              {{ article.author }}</a></td>
+                            
+                             <td></td>
+
+                            <td class="view-message  text-right" >{{ article.lastpost }}</td>
+                        </tr>
+
+  {% endfor %}
+{% else %}
+  <p>对不起没有文章奥!</p>
+{% endif %}
+
+ 
+                    
+                        </tbody>
+                        </table>
+
+
+
+
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+  {% endblock %}
+

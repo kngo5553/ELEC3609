@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+   
+
+
+
+ {% block sidebar %}
+
+ 
+              	  	
+                  <li class="mt">
+                      <a id="nav_homepage" class="active" href="/">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Homepage</span>
+                      </a>
+                  </li>
+
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>ELEC Forum</span>
+                      </a>
+                      <ul class="sub">
+
+                          <li><a  href="/general_thread_list">General Forum</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="/course/" >
+                          <i class="fa fa-bar-chart-o"></i>
+                          <span>Course Review</span>
+                      </a>
+					<ul class="sub">
+                        <li><a  href="/general_review_list">View Reviews</a></li>
+                    </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="/whiteboard/" >
+                          <i class="fa fa-book"></i>
+                          <span>Whiteboard</span>
+                      </a>
+               
+                  </li>
+            
+                 
+
+
+
+
+   {% endblock %}
+
+
+
+
+
+       {% block content %}
+
+
+
+
+        <h3><i class="fa fa-angle-right"></i> Discover Our Modules</h3>
+
+
+       <div class="row mt">
+            <!-- WEATHER PANEL -->
+                        <div class="col-md-4 col-sm-4 mb">
+              <div  class="weather pn">
+                <i class="fa fa-cloud fa-4x"></i>
+                <h2><a href="/general_thread_list/" style="color:white;">Forum Module</a></h2>
+                <h4 >ELEC Society</a></h4>
+              </div>
+            </div><!-- /col-md-4-->
+            
+            <!-- WEATHER-2 PANEL -->
+        <div class="col-lg-4 col-md-4 col-sm-4 mb">
+              <div class="content-panel pn">
+                <div id="profile-01">
+                  <h3>Course Review Module</h3>
+                  <h6>ELEC Society</h6>
+                </div>
+                <div class="profile-01 centered">
+                  <p><a href="/general_thread_list/" style="color:white;">Discover More</a></p>
+                </div>
+                <div class="centered">
+                  <h6><i class="fa fa-bullhorn"></i><br/>A good guide for your UoS.</h6>
+                </div>
+              </div><! --/content-panel -->
+            </div><! --/col-md-4 -->
+            
+            <!-- WEATHER-3 PANEL -->
+            <div class="col-lg-4 col-md-4 col-sm-4 mb">
+              <div class="weather-3 pn centered">
+                <i class="fa fa-sun-o"></i>
+                <h1>Whiteboard</h1>
+                <div class="info">
+                  <div class="row">
+                      <h3 class="centered"><a  href="/whiteboard/" style="color:black;">SHARE</a></h3>
+                    <div class="col-sm-6 col-xs-6 pull-left">
+                      <p class="goleft"><i class="fa fa-share"></i> Study Resources</p>
+                    </div>
+                
+                  </div>
+                </div>
+              </div>
+            </div><! --/col-md-4 -->
+          </div><!-- /END 6TH ROW OF PANELS -->
+
+
+                  
+      <!-- **********************************************************************************************************************************************************
+      RIGHT SIDEBAR CONTENT
+      *********************************************************************************************************************************************************** -->                  
+                  
+                  <div class="col-md-4 col-sm-4 ds">
+                    <!--COMPLETED ACTIONS DONUTS CHART-->
+            <h3>NEW THREADS</h3>
+                                        
+                      <!-- First Action -->
+
+                      {% if new_threads %}
+
+                      {% for thread in new_threads %}
+
+                      <div class="desc">
+                        <div class="thumb">
+                          <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+                        </div>
+                        <div class="details">
+                          <p><muted>{{thread.publish_time}}</muted><br/>
+                             <a href="/profile/{{thread.author.id}}">{{thread.author}}</a> created a new post.<br/>
+                          </p>
+                        </div>
+                      </div>
+                      {% endfor %}
+                      {% endif%}
+           
+
+           
+                      
+                  </div><!-- /col-lg-3 -->
+              </div><! --/row -->
+
+
+
+   <div class="col-lg-4 col-md-4 col-sm-4  ds">
+                    <!--COMPLETED ACTIONS DONUTS CHART-->
+            <h3>NEW REVIEWS</h3>
+                                        
+                      <!-- First Action -->
+
+                      {% if new_threads %}
+
+                      {% for thread in new_threads %}
+
+                      <div class="desc">
+                        <div class="thumb">
+                          <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+                        </div>
+                        <div class="details">
+                          <p><muted>{{thread.publish_time}}</muted><br/>
+                             <a href="#">{{thread.author}}</a> created a new post.<br/>
+                          </p>
+                        </div>
+                      </div>
+                      {% endfor %}
+                      {% endif%}
+           
+
+           
+                      
+                  </div><!-- /col-lg-3 -->
+              </div><! --/row -->
+
+
+
+                 <div class="col-lg-4 col-md-4 col-sm-4 ds">
+                    <!--COMPLETED ACTIONS DONUTS CHART-->
+            <h3>NEW RESOURCES</h3>
+                                        
+                      <!-- First Action -->
+
+                      {% if new_threads %}
+
+                      {% for thread in new_threads %}
+
+                      <div class="desc">
+                        <div class="thumb">
+                          <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+                        </div>
+                        <div class="details">
+                          <p><muted>{{thread.publish_time}}</muted><br/>
+                             <a href="#">{{thread.author}}</a> created a new post.<br/>
+                          </p>
+                        </div>
+                      </div>
+                      {% endfor %}
+                      {% endif%}
+           
+
+           
+                      
+                  </div><!-- /col-lg-3 -->
+              </div><! --/row -->
+
+
+        {% endblock %}
+

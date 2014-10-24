@@ -1,0 +1,4 @@
+Django
+PyMySQL
+MySQL-python
+pytz

@@ -1,0 +1,130 @@
+{% extends "reg_base.html" %}
+       {% block content %}
+
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+
+
+
+	  <div id="login-page">
+	  	<div class="container">
+	  	
+	  	  
+
+		      <form class="form-login" style="max-width: 1030px;" action="" method="post" >
+		        <h2 class="form-login-heading">Account Login</h2>
+
+ {% if errors %}
+             {% for error in errors %}
+
+         
+            <li class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <strong>ERROR:</strong> {{error}}
+            </li>              
+         
+                      
+        {% endfor %}
+    {% endif %}
+
+
+
+     <div class="login-wrap registration" style="max-height: 1030px;">
+
+		          
+                          <div class="form">
+                          
+
+<br><br>
+
+                                  <div class="form-group ">
+                                      <label for="username" class="control-label col-lg-2">Username</label>
+                                      <div class="col-lg-10">
+                                          <input class="form-control " id="username" name="account" type="text" placeholder = "Create your username" />
+                                      </div>
+                                  </div>
+<br><br>
+
+                                  <div class="form-group ">
+                                      <label for="password" class="control-label col-lg-2">Password</label>
+                                      <div class="col-lg-10">
+                                          <input class="form-control " id="password" name="password" type="password" placeholder="Create your password" />
+                                      </div>
+                                  </div>
+<br><br>
+                                  <div class="form-group ">
+                                      <label for="confirm_password" class="control-label col-lg-2">Confirm Password</label>
+                                      <div class="col-lg-10">
+                                          <input class="form-control " id="confirm_password" name="password2" type="password" placeholder="Comfirm your password" />
+                                      </div>
+                                  </div>
+<br><br>
+ 
+                                  <div class="form-group ">
+                                      <label for="email" class="control-label col-lg-2">Email</label>
+                                      <div class="col-lg-10">
+                                          <input class="form-control " id="email" name="email" type="email" placeholder="Enter your email"/>
+                                      </div>
+                                  </div>
+
+                                  <br><br>
+
+                         
+
+
+                                  <div class="form-group ">
+                                      <label for="uni_id" class="control-label col-lg-2">Uni SID</label>
+                                      <div class="col-lg-10">
+                                          <input type="text" class="form-control bfh-phone" id="uniid" name = "uniid" placeholder ="Example: 312012345" data-format="ddddddddd">
+                                      </div>
+                                  </div>
+
+                               
+
+                            
+                          </div>
+              
+
+
+	<br><br>	   
+
+
+
+		            <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-smile-o" value="Login"></i> Submit</button>
+
+
+		            <hr>
+		            
+		            		            <div class="registration">
+		                Already have an account ?<br/>
+		                <a class="" href="/login/">
+		                    Sign in now
+		                </a>
+		            </div>
+		              <hr>
+		           <div class="form-footer" style="text-align: center;">
+		            		<input type=button class="btn btn-default" value="Back to Homepage" onclick="window.location.href='/index/'">
+		            	
+						      </div>
+                     
+                     <hr>
+		            	
+		
+		        </div>
+		
+		       
+		
+		      </form>	  	
+
+
+
+
+
+
+
+	  	
+	  	</div>
+	  </div>
+
+        {% endblock %}

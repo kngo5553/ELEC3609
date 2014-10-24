@@ -1,0 +1,339 @@
+{% extends "forum_base.html" %}
+
+
+
+
+ {% block sidebar %}
+
+ 
+                    
+                  <li class="mt">
+                      <a id="nav_homepage"  href="/">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Homepage</span>
+                      </a>
+                  </li>
+
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="active">
+                          <i class="fa fa-desktop"></i>
+                          <span>ELEC Forum</span>
+                      </a>
+                      <ul class="sub">
+
+                          <li class="active"><a  href="/general_thread_list">General Forum</a></li>
+                       <!--    <li><a  href="buttons.html">ELEC Forum</a></li>
+                          <li><a  href="panels.html">Support & Help</a></li>
+                          <li><a  href="google_maps.html">Google Maps</a></li> -->
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-bar-chart-o"></i>
+                          <span>Course Review</span>
+                      </a>
+                    <ul class="sub">
+                        <li class="active"><a  href="/general_review_list">View Reviews</a></li>
+                    </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="/whiteboard/" >
+                          <i class="fa fa-book"></i>
+                          <span>Whiteboard</span>
+                      </a>
+                 
+                  </li>
+        
+
+
+
+
+   {% endblock %}
+
+
+
+
+{% block threadlist %}
+    <ul class="nav nav-pills nav-stacked mail-nav">
+                            
+                            <li class="active"><a href="/general_thread_list"> <i class="fa fa-inbox"></i> Thread List  </a></li>
+
+{% endblock %}
+                           {% block forumbar %}
+
+
+                      <!-- if post is deleted shoud be /../transhbin otherwise /../-->
+                          {% if thread.isIntrash == hasNone %}
+                       
+
+                            <li><a href="/general_thread_list/view_myposts/"> <i class="fa fa-file-text-o"></i> View My Posts</a></a></li>
+
+                           {% if user.is_staff %}
+                            <li><a href="/general_thread_list/trashbin/"> <i class="fa fa-trash-o"></i> Trash Bin</a></li>
+                            {% endif %}
+
+                             </ul>
+
+
+                            {% else %}
+
+
+                            <ul class="nav nav-pills nav-stacked mail-nav">
+                            <li><a href="/general_thread_list"> <i class="fa fa-inbox"></i> Thread List  </a></li>
+
+                        
+                            <li><a href="/general_thread_list/view_myposts/"> <i class="fa fa-file-text-o"></i> View My Posts</a></a></li>
+                          {% if user.is_staff %}
+                            <li class="active"><a href="/general_thread_list/trashbin/"> <i class="fa fa-trash-o"></i> Trash Bin</a></li>
+                         {% endif %} 
+                             </ul>
+                            {% endif %}
+
+                           {% endblock %}
+
+
+
+  {% block content %}
+
+
+            
+            <div class="col-sm-9">
+                <section class="panel">
+                    <header class="panel-heading wht-bg">
+                       <h4 class="gen-case"> View Post
+                           <form action="#" class="pull-right mail-src-position">
+                            <div class="input-append">
+                                <input type="text" class="form-control " placeholder="Search Mail">
+                            </div>
+                        </form>
+                       </h4>
+                    </header>
+                    <div class="panel-body ">
+
+                        <div class="mail-header row">
+                            <div class="col-md-8">
+                                <h4 class="pull-left"> <strong>Title:</strong> {{ thread.title}}  </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="compose-btn pull-right">
+                               
+                                   
+
+   <! -- MODALS -->
+            
+            <!-- Button trigger modal -->
+
+{% if user.is_authenticated %}
+    {% if thread.isIntrash == hasNone %}
+        {% if user.is_staff %}
+
+    
+
+             <a class="btn btn-sm tooltips" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-trash-o"></i> 
+                            </a>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Admin Message</h4>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete this post?
+                  </div>
+                  <div class="modal-footer">
+
+                       <form action="" method="POST">
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+
+
+                         <input class="btn btn-primary" type="submit" name="delete" value="YES">
+
+
+            
+                            </form>
+                  </div>
+                </div>
+              </div>
+            </div>       
+             <!-- Modal End-->   
+{% endif %}
+{% else %}
+[Removed]
+{% endif %}
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mail-sender">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <strong>Author:</strong> 
+                                    {% load static from staticfiles %}
+                                    <img src="{% static "assets/data/ui-sam.jpg" %}" alt="">
+<!-- post author -->
+                                    <strong><a href="/profile/{{thread.author.id}}">{{ thread.author.username}}</a></strong>
+                            
+                                </div>
+<!-- post publish time -->
+                                <div class="col-md-4">
+                                    <p class="date"> {{ thread.publish_time | date:"1,F jS"}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+<!-- post content -->
+                        <div class="view-mail">
+                         
+                        {% autoescape off %} 
+                               {{thread.content}}
+
+                          {% endautoescape %}
+                        </div>
+
+
+
+                   <div class="col-lg-13 ds">
+                    <!--COMPLETED ACTIONS DONUTS CHART-->
+              
+<!-- attachment #TODO-->
+    <div class="attachment-mail"></div>
+
+
+<!-- Comments list -->
+
+
+
+   {% if info %}
+       {% for comment in articleList.object_list %}
+                      <!-- First Action -->
+                      <div class="desc">
+
+
+                        <div class="thumb">
+                         <img class="img-circle" src="{% static "assets/data/ui-sam.jpg" %}" alt="" width="35px" height="35px" align="">
+                        </div>
+
+                        <div class="details" style="width:980px;">
+
+
+                          <p><muted>{{ comment.create_time }}</muted><br/>
+
+
+                     <a href="/profile/{{comment.from_user.id}}">{{ comment.from_user }}</a> {{ comment.content }}<br/>
+                          </p>
+                         
+                        </div>
+
+
+                      </div>
+                      {% endfor %}
+
+                   {% endif %}
+
+
+
+                    </div>
+
+
+
+
+
+           
+                              <div style="text-align: center;">
+
+                                <ul class="pagination pagination-lg">
+
+                            {% if has_previous %}
+                                     <li><a href="/?page={{ previous }}">Prev</a></li>
+                            {% endif %}
+                            {% if has_next %}
+                                     <li><a href="/?page={{ next }}">Next</a><li>
+                            {% endif %}
+
+
+                            {% if articleList.has_previous %}
+                                <li><a href="?page={{ articleList.previous_page_number }}" title="Prev">Prev</a></li>
+                            {% endif %}
+
+                                {% for p in page_range %}
+                                    {% ifequal p articleList.number %}
+                                     <li class="disabled"><a href="#">{{p}}</a></li>
+                                    {% else %}
+                                        <li><a href="?page={{p}}" title="Page:{{p}}">{{p}}</a></li>
+                                    {% endifequal %}
+                                {% endfor %}
+                            &nbsp;
+                            {% if articleList.has_next %}
+                                <li><a href="?page={{ articleList.next_page_number }}" title="Next">Next</a></li>
+                            {% endif %}
+                            </ul>
+
+
+
+                        </div>
+
+
+
+      {% if user.is_authenticated %}
+                    {% if thread.isIntrash == hasNone %}
+                          <form role="form-horizontal" method="post" action="">
+                                 <div class="compose-editor" style="text-align: left;">
+                                    <textarea name="content" class="form-control" rows="9"></textarea>
+                                    
+                                </div>
+
+
+                                
+                                     <div class="compose-btn">
+                                    <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-check"></i> Submit</button>
+
+          
+                       
+                        </div>
+
+
+    {% if errors %}
+                {% for error in errors %}
+        <li>
+
+             <p style="color: red;">
+                Please correct the error: {{error}} below.
+             </p>
+            
+        </li>
+          {% endfor %}
+    {% endif %}
+      {% endif %}
+
+
+                      </form>
+
+{%endif%}
+
+                    </div>
+                </section>
+            </div>
+
+
+        </div>
+
+  {% endblock %}

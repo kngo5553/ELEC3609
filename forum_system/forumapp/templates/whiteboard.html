@@ -1,0 +1,72 @@
+
+
+{% extends "base.html" %}
+
+
+
+
+ {% block sidebar %}
+
+ 
+                    
+                  <li class="mt">
+                      <a id="nav_homepage"  href="/">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Homepage</span>
+                      </a>
+                  </li>
+
+
+                  <li class="sub-menu">
+                      <a href="javascript:;">
+                          <i class="fa fa-desktop"></i>
+                          <span>ELEC Forum</span>
+                      </a>
+                      <ul class="sub">
+
+                          <li class="active"><a  href="/general_thread_list">General Forum</a></li>
+               <!--            <li><a  href="buttons.html">ELEC Forum</a></li>
+                          <li><a  href="panels.html">Support & Help</a></li>
+                          <li><a  href="google_maps.html">Google Maps</a></li> -->
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="#" >
+                          <i class="fa fa-bar-chart-o"></i>
+                          <span>Course Review</span>
+                      </a>
+                    <ul class="sub">
+                        <li class="active"><a  href="/general_review_list">View Reviews</a></li>
+                    </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="active">
+                          <i class="fa fa-book"></i>
+                          <span>Whiteboard</span>
+                      </a>
+                 
+                  </li>
+             
+
+
+
+
+   {% endblock %}
+
+
+
+  {% block content %}
+
+<object data="/white/" width="1000" height="600"> <embed src="/white/" width=”650″ height=”500″> </embed></object>
+
+
+  {% endblock %}
+
+
+
+{% block script %}
+
+{% endblock %}
+
+

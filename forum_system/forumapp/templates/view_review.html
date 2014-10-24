@@ -1,0 +1,261 @@
+{% extends "review_base.html" %}
+
+
+
+ {% block sidebar %}
+
+ 
+                    
+                  <li class="mt">
+                      <a id="nav_homepage"  href="/">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Homepage</span>
+                      </a>
+                  </li>
+
+
+                  <li class="sub-menu">
+                      <a href="javascript:;">
+                          <i class="fa fa-desktop"></i>
+                          <span>ELEC Forum</span>
+                      </a>
+                      <ul class="sub">
+
+                          <li ><a href="/general_thread_list">General Forum</a></li>
+                       <!--    <li><a  href="buttons.html">ELEC Forum</a></li>
+                          <li><a  href="panels.html">Support & Help</a></li>
+                          <li><a  href="google_maps.html">Google Maps</a></li> -->
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="active">
+                          <i class="fa fa-bar-chart-o" class="active"></i>
+                          <span>Course Review</span>
+                      </a>
+                    <ul class="sub">
+                        <li class="active"><a  href="/general_review_list">View Reviews</a></li>
+                    </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Whiteboard</span>
+                      </a>
+            
+                  </li>
+             
+                 
+
+
+
+
+   {% endblock %}
+
+
+
+
+{% block threadlist %}
+    <ul class="nav nav-pills nav-stacked mail-nav">
+                            
+                            <li class="active"><a href="/general_thread_list"> <i class="fa fa-inbox"></i> Review List  </a></li>
+
+{% endblock %}
+                          
+
+
+  {% block content %}
+
+
+            
+            <div class="col-sm-9">
+                <section class="panel">
+                    <header class="panel-heading wht-bg">
+                       <h4 class="gen-case"> View Course
+                          
+                       </h4>
+                    </header>
+                    <div class="panel-body ">
+
+                        <div class="mail-header row">
+                            <div class="col-md-8">
+                                <h4 class="pull-left"> <strong>Course Name:</strong> {{ course.subject_name}}  </h4>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="compose-btn pull-right">
+                               
+                                   
+
+   <! -- MODALS -->
+            
+            <!-- Button trigger modal -->
+
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mail-sender">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <strong>Lecturer:</strong> 
+                                    {% load static from staticfiles %}
+                                    <img src="{% static "assets/data/ui-sam.jpg" %}" alt="">
+                                    <strong><a href="#">{{ course.lecturer}}</a></strong>
+                                </div>
+                            </div>
+                        </div>
+<!-- post content -->
+                        <div class="view-mail">
+							<strong>Rating:</strong> 
+								{{course.rating}}
+                        </div>
+
+
+
+                   <div class="col-lg-13 ds">
+                    <!--COMPLETED ACTIONS DONUTS CHART-->
+              
+<!-- attachment #TODO-->
+<br><hr>
+
+<strong>Reviews:</strong>
+<!-- Comments list -->
+
+
+
+   {% if info %}
+       {% for review in articleList.object_list %}
+                      <!-- First Action -->
+                      <div class="desc ">
+
+
+                        <div class="thumb">
+                         <img class="img-circle" src="{% static "assets/data/ui-sam.jpg" %}" alt="" width="35px" height="35px" align="">
+                        </div>
+						<div class="col-md-6 col-sm-6 mb">
+						</div>
+											
+						
+						
+                        <div class="details" style="width:980px;">
+
+
+                          <p><muted>{{ review.publish_time }}</muted><br/>
+
+
+                     <a href="/profile/{{ user.id}}">{{ review.author }}</a>
+					 <br><h4>{{ review.title }}</h4>
+						   <div class="col-md-1 col-sm-1 mb" align="left">
+								<div class="darkblue-panel">
+									<div class="darkblue-header">
+										<h5>RATING</h5>
+										<h5>{{review.rating}}</h5>
+									</div>
+								</div>
+							</div>
+						{{ review.content }}
+                        </div>
+
+
+                      </div>
+                      {% endfor %}
+
+                   {% endif %}
+
+
+
+                    </div>
+
+
+
+
+
+           
+                              <div style="text-align: center;">
+
+                                <ul class="pagination pagination-lg">
+
+                            {% if has_previous %}
+                                     <li><a href="/?page={{ previous }}">Prev</a></li>
+                            {% endif %}
+                            {% if has_next %}
+                                     <li><a href="/?page={{ next }}">Next</a><li>
+                            {% endif %}
+
+
+                            {% if articleList.has_previous %}
+                                <li><a href="?page={{ articleList.previous_page_number }}" title="Prev">Prev</a></li>
+                            {% endif %}
+
+                                {% for p in page_range %}
+                                    {% ifequal p articleList.number %}
+                                     <li class="disabled"><a href="#">{{p}}</a></li>
+                                    {% else %}
+                                        <li><a href="?page={{p}}" title="Page:{{p}}">{{p}}</a></li>
+                                    {% endifequal %}
+                                {% endfor %}
+                            &nbsp;
+                            {% if articleList.has_next %}
+                                <li><a href="?page={{ articleList.next_page_number }}" title="Next">Next</a></li>
+                            {% endif %}
+                            </ul>
+
+
+
+                        </div>
+
+
+
+      {% if user.is_authenticated %}
+       
+					<h2>Write a review:</h2>
+                          <form role="form-horizontal" method="post" action="">
+                                 <div class="compose-editor" style="text-align: left;">
+                                    <textarea name="content" class="form-control" rows="9"></textarea>
+                                    
+                                </div>
+
+
+                                
+                                     <div class="compose-btn">
+                                    <button class="btn btn-theme btn-sm" type="submit"><i class="fa fa-check"></i> Submit</button>
+
+          
+                       
+                        </div>
+
+
+    {% if errors %}
+                {% for error in errors %}
+        <li>
+
+             <p style="color: red;">
+                Please correct the error: {{error}} below.
+             </p>
+            
+        </li>
+          {% endfor %}
+    {% endif %}
+  
+
+
+                      </form>
+
+{%endif%}
+
+                    </div>
+                </section>
+            </div>
+
+
+        </div>
+
+  {% endblock %}
